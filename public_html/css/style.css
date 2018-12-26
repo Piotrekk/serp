@@ -78,4 +78,56 @@ html, body {
     .c-header ul li + li {
       margin-left: 15px; }
 
+.tableMain {
+  border: 5px;
+  width: 100%;
+  text-align: left;
+  padding: 10px; }
+
+.topTable {
+  border: 5px;
+  width: 100%;
+  text-align: left;
+  padding: 10px; }
+
+.divTopRight {
+  text-align: right;
+  font-family: "Arial";
+  font-size: 20px;
+  font-weight: normal;
+  padding: 5px; }
+
+.bold {
+  font-weight: bold; }
+
+.lekarze {
+  width: auto;
+  font-family: "Arial";
+  font-size: 45px;
+  font-weight: bold; }
+
+.wizyty {
+  width: auto;
+  font-family: "Arial";
+  font-size: 30px;
+  font-weight: normal;
+  padding: 10px; }
+
+tr:nth-child(odd) {
+  background: #EFEFEF; }
+
+tr:nth-child(even) {
+  background: #DFDFDF; }
+
+.divTable {
+  display: table;
+  width: 100%; }
+
+.divTableRow {
+  display: table-row; }
+
+.divTableCell, .divTableHead {
+  border: 1px solid #999999;
+  display: table-cell; }
+
 /*# sourceMappingURL=style.css.map */
