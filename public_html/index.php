@@ -13,12 +13,29 @@
   <body>
 
     <?php
-      $users_query = mysqli_query($server, "SELECT * from Users") or die ("Zle sformulowane query");
 
-      while ($row = mysqli_fetch_array($users_query)) {
-        echo implode(' ', $row);
+    if (mysqli_connect_errno())
+      {
+      echo "Failed to connect to MySQL: " . mysqli_connect_error();
       }
-    ?>
+
+
+  //  global $server;
+      $query1 =    'SELECT * FROM `Patients`';
+      $users_query = mysqli_query($server, $query1) or die ("Zle sformulowane query");
+
+      while ($row = mysqli_fetch_array($users_query))
+       {
+        echo implode(' ', $row);
+        }
+
+?>
+
+
+
+
+
+
 
   </body>
 </html>
