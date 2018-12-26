@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 
-<?php
-  include 'php/utils/connection.php';
-?>
-
 <html>
   <head>
     <title>SERP - System Elektronicznej Rejestracji Pacjenta</title>
@@ -13,12 +9,10 @@
   <body>
 
     <?php
-      $users_query = mysqli_query($server, "SELECT * from Users") or die ("Zle sformulowane query");
-
-      while ($row = mysqli_fetch_array($users_query)) {
-        echo implode(' ', $row);
-      }
+      include 'php/components/header.php';
     ?>
+
+    SERP strona glowna
 
   </body>
 </html>

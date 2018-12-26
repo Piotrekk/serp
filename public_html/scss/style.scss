@@ -1,3 +1,9 @@
-body {
-  background-color: green;
-}
+@import "reset";
+
+@import "constants";
+@import "utilities";
+@import "helpers";
+@import "main";
+
+// components
+@import "components/header"
