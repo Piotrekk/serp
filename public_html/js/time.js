@@ -1,20 +1,19 @@
 function time() {
-  let tm = new Date,
-    wynikTxt = '',
-    godzina = tm.getHours();
+  let currentTime = new Date(),
+    resultStr = '',
+    hour = currentTime.getHours();
 
-  if (godzina < 10) {
-    godzina = "0" + godzina;
+  if (hour < 10) {
+    hour = "0" + hour;
   }
 
-  let minuta = tm.getMinutes();
+  let minute = currentTime.getMinutes();
 
-  if (godzina < 10) {
-    minuta = "0" + minuta;
+  if (hour < 10) {
+    minute = "0" + minute;
   }
 
-  wynikTxt += godzina + ":" + minuta + "  /  ";
-  wynikTxt += "    " + tm.getDate() + "." + (tm.getMonth() + 1) + "." + tm.getFullYear();
+  resultStr = `${hour}:${minute} / ${currentTime.getDate()}.${(currentTime.getMonth() + 1)}.${currentTime.getFullYear()}`;
 
-  document.write(wynikTxt);
+  document.write(resultStr);
 }

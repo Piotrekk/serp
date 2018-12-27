@@ -1,0 +1,28 @@
+.p-waiting-room {
+	&__time {
+		padding: 5px;
+		font-size: 20px;
+		text-align: right;
+	}
+
+	&__visits {
+		width: 100%;
+		display: table;
+		padding: 10px;
+		text-align: left;
+
+		&__visit {
+			display: table-row;
+
+			&__cell {
+				width: auto;
+				display: table-cell;
+				border: 1px solid #999999;
+
+				span {
+					display: block;
+				}
+			}
+		}
+	}
+}

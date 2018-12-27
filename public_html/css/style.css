@@ -57,6 +57,17 @@ table {
 .u-margin-top--base {
   padding-top: 20px !important; }
 
+.u-padding--10 {
+  padding: 10px; }
+
+.u-font-weight--600 {
+  font-weight: 600; }
+
+.u-font-size--30 {
+  font-size: 30px; }
+.u-font-size--45 {
+  font-size: 45px; }
+
 .h-inner {
   max-width: 1280px;
   margin: 0 auto;
@@ -78,56 +89,22 @@ html, body {
     .c-header ul li + li {
       margin-left: 15px; }
 
-.tableMain {
-  border: 5px;
-  width: 100%;
-  text-align: left;
-  padding: 10px; }
-
-.topTable {
-  border: 5px;
-  width: 100%;
-  text-align: left;
-  padding: 10px; }
-
-.divTopRight {
-  text-align: right;
-  font-family: "Arial";
+.p-waiting-room__time {
+  padding: 5px;
   font-size: 20px;
-  font-weight: normal;
-  padding: 5px; }
-
-.bold {
-  font-weight: bold; }
-
-.lekarze {
-  width: auto;
-  font-family: "Arial";
-  font-size: 45px;
-  font-weight: bold; }
-
-.wizyty {
-  width: auto;
-  font-family: "Arial";
-  font-size: 30px;
-  font-weight: normal;
-  padding: 10px; }
-
-tr:nth-child(odd) {
-  background: #EFEFEF; }
-
-tr:nth-child(even) {
-  background: #DFDFDF; }
-
-.divTable {
+  text-align: right; }
+.p-waiting-room__visits {
+  width: 100%;
   display: table;
-  width: 100%; }
-
-.divTableRow {
-  display: table-row; }
-
-.divTableCell, .divTableHead {
-  border: 1px solid #999999;
-  display: table-cell; }
+  padding: 10px;
+  text-align: left; }
+  .p-waiting-room__visits__visit {
+    display: table-row; }
+    .p-waiting-room__visits__visit__cell {
+      width: auto;
+      display: table-cell;
+      border: 1px solid #999999; }
+      .p-waiting-room__visits__visit__cell span {
+        display: block; }
 
 /*# sourceMappingURL=style.css.map */

@@ -21,3 +21,25 @@
     padding-top: $c-space-vertical !important;
   }
 }
+
+.u-padding {
+  &--10 {
+    padding: 10px;
+  }
+}
+
+.u-font-weight {
+  &--600 {
+    font-weight: 600;
+  }
+}
+
+.u-font-size {
+  &--30 {
+    font-size: 30px;
+  }
+
+  &--45 {
+    font-size: 45px;
+  }
+}
