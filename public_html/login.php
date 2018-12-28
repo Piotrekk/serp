@@ -20,10 +20,6 @@
     Logowanie
 
     <?php
-      function randHash($length = 32) {
-        return substr(md5(openssl_random_pseudo_bytes(20)), -$length);
-      }
-
       if (!empty($_POST["email"]) && !empty($_POST["password"])) {
         $loginQuery = mysqli_query($server, "SELECT * from Users WHERE email LIKE '".$_POST["email"]."'"."AND password LIKE '".$_POST["password"]."'")
          or die ("Zle sformulowane query");
@@ -31,7 +27,7 @@
         $result = mysqli_fetch_assoc($loginQuery);
 
         if (is_array($result)) {
-          $accessToken = randHash(20);
+          $accessToken = bin2hex(random_bytes(8));
           $insertQuery = "INSERT INTO Logins (user_id, token) VALUES ('".array_values($result)[0]."', '".$accessToken."')";
           mysqli_query($server, $insertQuery);
 
