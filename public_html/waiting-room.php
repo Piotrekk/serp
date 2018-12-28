@@ -10,6 +10,7 @@
     <title>SERP - System Elektronicznej Rejestracji Pacjenta</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/time.js"></script>
+    <meta http-equiv="refresh" content="30">
   </head>
 
   <body>
