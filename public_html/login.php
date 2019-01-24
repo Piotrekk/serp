@@ -20,8 +20,14 @@
     Logowanie
 
     <?php
+      include 'php/utils/encryption.php';
+
+      if (!empty($_SESSION["authentication_error"])) {
+        unset($_SESSION["authentication_error"]);
+      }
+
       if (!empty($_POST["email"]) && !empty($_POST["password"])) {
-        $loginQuery = mysqli_query($server, "SELECT * from Users WHERE email LIKE '".$_POST["email"]."'"."AND password LIKE '".$_POST["password"]."'")
+        $loginQuery = mysqli_query($server, "SELECT * from Users WHERE email LIKE '".$_POST["email"]."'"."AND password LIKE '".encrypt($_POST["password"])."'")
          or die ("Zle sformulowane query");
 
         $result = mysqli_fetch_assoc($loginQuery);
