@@ -453,3 +453,23 @@ html, body {
         margin: 0 0 0 7.5px; }
 
 /*# sourceMappingURL=style.css.map */
+
+/* reception ---------------------------- */
+
+.p-reception__time {
+  padding: 5px;
+  font-size: 20px;
+  text-align: right; }
+.p-reception__visits__table {
+  width: 100%;
+  display: table;
+  padding: 10px;
+  text-align: left; }
+  .p-reception__visits__row {
+    display: table-row; }
+    .p-reception__visits__cell {
+      width: auto;
+      display: table-cell;
+      border: 1px solid #999999; }
+      .p-waiting-room__visits__cell span {
+        display: block; }
