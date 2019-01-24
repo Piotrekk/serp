@@ -18,7 +18,11 @@
       include '../php/components/header.php';
     ?>
 
-    app
+    <section class="p-app main-background-gradient">
+      <div class="h-inner u-margin-top--base">
+        app
+      </div>
+    </section>
 
   </body>
 </html>

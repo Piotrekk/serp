@@ -9,6 +9,7 @@
   <head>
     <title>SERP - System Elektronicznej Rejestracji Pacjenta</title>
     <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
   <body>
@@ -16,8 +17,6 @@
     <?php
       include 'php/components/header.php';
     ?>
-
-    Logowanie
 
     <?php
       include 'php/utils/encryption.php';
@@ -44,19 +43,27 @@
                   window.location = '/app/app.php';
                 </script>";
         } else {
-          echo "Nieprawidłowy email lub hasło!";
+          $_SESSION["authentication_error"] = true;
         }
       }
     ?>
 
-    <section>
+    <section class="p-login main-background-gradient">
       <div class="h-inner u-margin-top--base">
 
+        <h1 class="u-margin-bottom--base-x2">Zaloguj się</h1>
+
         <form method="POST">
-          <input type="email" name="email" />
-          <input type="password" name="password" />
-          <input type="submit" value="Zaloguj się" />
+          <input class="input u-margin-bottom--base" type="email" name="email" placeholder="Email" />
+          <input class="input u-margin-bottom--base" type="password" name="password" placeholder="Hasło" />
+          <input class="button button--color-blue" type="submit" value="Zaloguj się" />
         </form>
+
+        <?php
+          if (!empty($_SESSION["authentication_error"])) {
+            echo "<span class='u-display--flex u-justify-content--center u-margin-top--base u-color--red'>Nieprawidłowy email lub hasło!</span>";
+          }
+        ?>
 
       </div>
     </section>

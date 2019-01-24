@@ -1,0 +1,23 @@
+.button {
+  padding: 15px 40px;
+  text-decoration: none;
+  outline: none;
+  font-size: 16px;
+  border: 0;
+  border-radius: $c-border-radius;
+  transition: $c-transition;
+  cursor: pointer;
+
+  &--color-blue {
+    color: $white;
+    background-color: $blue;
+
+    &:hover {
+      box-shadow: $c-button-box-shadow;
+    }
+
+    &:active {
+      background-color: darken($blue, 5%);
+    }
+  }
+}

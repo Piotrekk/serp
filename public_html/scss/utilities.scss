@@ -16,9 +16,25 @@
   }
 }
 
+.u-justify-content {
+  &--center {
+    justify-content: center;
+  }
+}
+
 .u-margin-top {
   &--base {
     padding-top: $c-space-vertical !important;
+  }
+}
+
+.u-margin-bottom {
+  &--base {
+    margin-bottom: $c-space-vertical !important;
+  }
+
+  &--base-x2 {
+    margin-bottom: $c-space-vertical * 2 !important;
   }
 }
 
@@ -41,5 +57,11 @@
 
   &--45 {
     font-size: 45px;
+  }
+}
+
+.u-color {
+  &--red {
+    color: $red;
   }
 }

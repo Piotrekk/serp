@@ -1,7 +1,10 @@
 @import "reset";
 
+@import "colors";
 @import "constants";
 @import "utilities";
+@import "buttons";
+@import "inputs";
 @import "helpers";
 @import "main";
 
@@ -10,3 +13,6 @@
 
 // pages
 @import "pages/waiting-room";
+@import "pages/homepage";
+@import "pages/login";
+@import "pages/app";

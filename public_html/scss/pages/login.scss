@@ -1,0 +1,21 @@
+.p-login {
+  height: calc(100vh - #{$header-height});
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  div {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  h1 {
+    font-size: 40px;
+    color: $black;
+  }
+
+  form {
+    display: flex;
+    flex-flow: column;
+  }
+}

@@ -1,6 +1,14 @@
 $c-font-size: 18px;
 
+$c-border-radius: 4px;
 $c-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+$c-transition: All 0.1s ease-out;
+
+$c-button-box-shadow: 0px 0px 6px 3px rgba(0, 0, 0, 0.2);
 
 $c-space-vertical: 20px;
 $c-space-horizontal: 15px;
+
+$header-height: 80px;
+
+$mobile-breakpoint: 768px;

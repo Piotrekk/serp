@@ -2,3 +2,7 @@ html, body {
   font-family: Arial;
   font-size: $c-font-size;
 }
+
+.main-background-gradient {
+  background-image: linear-gradient(to bottom, $gradient-blue-1, $gradient-blue-2);
+}
