@@ -154,23 +154,38 @@ html, body {
     .c-header ul li + li {
       margin-left: 15px; }
 
-.p-waiting-room__time {
-  padding: 5px;
-  font-size: 20px;
-  text-align: right; }
-.p-waiting-room__visits {
-  width: 100%;
-  display: table;
-  padding: 10px;
-  text-align: left; }
-  .p-waiting-room__visits__visit {
-    display: table-row; }
-    .p-waiting-room__visits__visit__cell {
-      width: auto;
-      display: table-cell;
-      border: 1px solid #999999; }
-      .p-waiting-room__visits__visit__cell span {
-        display: block; }
+.p-waiting-room {
+  height: 100vh;
+  background-color: #E4F0FF; }
+  .p-waiting-room__time {
+    padding: 40px 0;
+    font-size: 5vw;
+    text-align: center; }
+  .p-waiting-room__visits {
+    width: 100%;
+    display: table;
+    text-align: left; }
+    .p-waiting-room__visits__visit {
+      display: flex; }
+      .p-waiting-room__visits__visit:nth-of-type(even) {
+        background-color: #E4F0FF; }
+      .p-waiting-room__visits__visit:nth-of-type(odd) {
+        background-color: #C6DDFF; }
+      .p-waiting-room__visits__visit__cell {
+        width: auto;
+        padding: 10px 30px;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        border-right: 1px solid rgba(0, 0, 0, 0.5); }
+        .p-waiting-room__visits__visit__cell:first-of-type {
+          min-width: 30%;
+          white-space: nowrap; }
+        .p-waiting-room__visits__visit__cell span {
+          display: block;
+          font-size: 2vw; }
+          .p-waiting-room__visits__visit__cell span:nth-of-type(2) {
+            margin: 20px 0; }
 
 .p-homepage {
   height: calc(100vh - 80px);

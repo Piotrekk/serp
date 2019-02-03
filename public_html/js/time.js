@@ -9,11 +9,11 @@ function time() {
 
   let minute = currentTime.getMinutes();
 
-  if (hour < 10) {
+  if (minute < 10) {
     minute = "0" + minute;
   }
 
-  resultStr = `${hour}:${minute} / ${currentTime.getDate()}.${(currentTime.getMonth() + 1)}.${currentTime.getFullYear()}`;
+  resultStr = `${hour}:${minute}, ${currentTime.getDate()} ${(new Date()).toLocaleString('pl', { month: 'long' })} ${currentTime.getFullYear()}`;
 
   document.write(resultStr);
 }

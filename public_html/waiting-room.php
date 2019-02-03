@@ -40,9 +40,9 @@
                  </div>";
 
             echo "<div class='p-waiting-room__visits__visit__cell u-padding--10 u-font-size--30'>
-                    <span>Gabitent:</span>
-                    <span>Numer:</span>
-                    <span>Godzina:</span>
+                    <span>Gabitent</span>
+                    <span>Numer</span>
+                    <span>Godzina</span>
                   </div>";
 
             // visits
@@ -57,7 +57,7 @@
             // doctors list
             while ($visit = mysqli_fetch_array($visits)) {
               $hour = substr($visit[2],0,5);
-              echo "<div class='p-waiting-room__visits__visit__cell u-padding--10 u-font-size--30'>
+              echo "<div class='p-waiting-room__visits__visit__cell u-font-size--30'>
                       <span>$visit[0]</span>
                       <span class='u-font-weight--600'>$visit[1]</span>
                       <span>$hour</span>
