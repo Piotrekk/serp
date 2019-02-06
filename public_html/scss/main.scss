@@ -6,3 +6,16 @@ html, body {
 .main-background-gradient {
   background-image: linear-gradient(to bottom, $gradient-blue-1, $gradient-blue-2);
 }
+
+.main-heading-h1 {
+  max-width: 1000px;
+  margin-bottom: 50px;
+  font-weight: 800;
+  font-size: 50px;
+  color: $black;
+  word-break: break-word;
+}
+
+.main-divider-top {
+  border-top: $c-divider;
+}

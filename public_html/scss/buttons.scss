@@ -20,4 +20,20 @@
       background-color: darken($blue, 5%);
     }
   }
+
+  &--small {
+    padding: 7px 20px;
+  }
+
+  &--link {
+    padding: 15px 0;
+    text-decoration: none;
+    color: $black;
+
+    &:hover {
+      color: $blue;
+      box-shadow: $c-button-link-box-shadow;
+      border-radius: 0;
+    }
+  }
 }

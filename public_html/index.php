@@ -21,7 +21,7 @@
 
     <section class="p-homepage main-background-gradient">
       <div class="h-inner">
-        <h1>System Elektronicznej Rejestracji Pacjenta</h1>
+        <h1 class="main-heading-h1">System Elektronicznej Rejestracji Pacjenta</h1>
         <button class="button button--color-blue">Zarejestruj się</button>
       </div>
     </section>

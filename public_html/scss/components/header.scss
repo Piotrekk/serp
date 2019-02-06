@@ -46,7 +46,7 @@
     }
 
     li + li {
-      margin-left: $c-space-horizontal;
+      margin-left: $c-space-horizontal * 2;
     }
   }
 }

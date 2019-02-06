@@ -9,4 +9,8 @@
   &:focus {
     box-shadow: $c-button-box-shadow;
   }
+
+  &--small {
+    padding: 7px 10px;
+  }
 }

@@ -19,7 +19,7 @@
     ?>
 
     <section class="p-app main-background-gradient">
-      <div class="h-inner u-margin-top--base">
+      <div class="h-inner u-padding-top--base">
         app
       </div>
     </section>

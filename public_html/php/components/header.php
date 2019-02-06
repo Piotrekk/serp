@@ -16,6 +16,19 @@
 
     <ul>
       <li>
+        <a href="/waiting-room.php" class="button button--link">Poczekalnia</a>
+      </li>
+
+      <?php
+        if (isset($isLogged) && $isLogged) {
+      ?>
+        <li>
+          <a href="/app/reception.php" class="button button--link">Recepcja</a>
+        </li>
+      <?php
+        }
+      ?>
+      <li>
         <?php
           if (isset($isLogged) && $isLogged) {
             echo "<a href='/logout.php' class='button button--color-blue'>"

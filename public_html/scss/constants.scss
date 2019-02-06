@@ -1,10 +1,14 @@
+$c-font-size-sm: 16px;
 $c-font-size: 18px;
+$c-font-size-xl: 22px;
 
 $c-border-radius: 4px;
 $c-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+$c-box-shadow-xl: 0px 1px 10px rgba(0, 0, 0, 0.3);
 $c-transition: All 0.1s ease-out;
 
 $c-button-box-shadow: 0px 0px 6px 3px rgba(0, 0, 0, 0.2);
+$c-button-link-box-shadow: inset -1px -4px 0px -2px $blue;
 
 $c-space-vertical: 20px;
 $c-space-horizontal: 15px;
@@ -12,3 +16,5 @@ $c-space-horizontal: 15px;
 $header-height: 80px;
 
 $mobile-breakpoint: 768px;
+
+$c-divider: 1px solid rgba(0, 0, 0, 0.3);

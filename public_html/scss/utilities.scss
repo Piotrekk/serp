@@ -24,7 +24,11 @@
 
 .u-margin-top {
   &--base {
-    padding-top: $c-space-vertical !important;
+    margin-top: $c-space-vertical !important;
+  }
+
+  &--base-half {
+    margin-top: $c-space-vertical / 2 !important;
   }
 }
 
@@ -41,6 +45,16 @@
 .u-padding {
   &--10 {
     padding: 10px;
+  }
+}
+
+.u-padding-top {
+  &--base {
+    padding-top: $c-space-vertical !important;
+  }
+
+  &--base-half {
+    padding-top: $c-space-vertical / 2 !important;
   }
 }
 
@@ -63,5 +77,15 @@
 .u-color {
   &--red {
     color: $red;
+  }
+}
+
+.u-cursor {
+  &--grab {
+    cursor: grab;
+  }
+
+  &--zoom-in {
+    cursor: zoom-in;
   }
 }
