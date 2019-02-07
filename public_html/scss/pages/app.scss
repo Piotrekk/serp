@@ -1,3 +1,41 @@
 .p-app {
   height: calc(100vh - #{$header-height});
+
+  &__wrapper {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  &__box {
+    width: calc(50% - #{$c-space-vertical});
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    padding: 50px;
+    font-size: 30px;
+    color: $white;
+    background-color: $blue;
+    border-radius: $c-border-radius * 3;
+    box-shadow: $c-box-shadow;
+    box-sizing: border-box;
+
+    &:nth-of-type(even) {
+      margin-left: $c-space-vertical * 2;
+    }
+
+    &:nth-of-type(n+3) {
+      margin-top: $c-space-vertical * 2;
+    }
+
+    h1 {
+      font-size: $c-font-size-xl * 4;
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: $c-space-vertical;
+      font-size: $c-font-size-xl;
+    }
+  }
 }

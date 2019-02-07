@@ -9,8 +9,11 @@
 @import "main";
 
 // components
+@import "components/ui-checkbox";
+@import "components/ui-radio";
 @import "components/header";
 @import "components/modal";
+@import "components/timetable";
 
 // pages
 @import "pages/waiting-room";

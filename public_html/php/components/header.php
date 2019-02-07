@@ -23,6 +23,10 @@
         if (isset($isLogged) && $isLogged) {
       ?>
         <li>
+          <a href="/app/my_schedule.php" class="button button--link">Mój plan</a>
+        </li>
+
+        <li>
           <a href="/app/reception.php" class="button button--link">Recepcja</a>
         </li>
       <?php

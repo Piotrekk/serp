@@ -1,0 +1,39 @@
+.ui-radio {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  span {
+    width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: $c-space-vertical / 2;
+    position: relative;
+    background-color: $white;
+    border: 2px solid $blue;
+    border-radius: 100%;
+    transition: $c-transition;
+  }
+
+  input:checked + span {
+    background: $blue;
+
+    svg {
+      opacity: 1;
+    }
+  }
+
+  svg {
+    width: 12px;
+    height: 12px;
+    color: $white;
+    opacity: 0;
+  }
+}

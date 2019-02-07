@@ -25,10 +25,8 @@
 <html>
   <head>
     <title>SERP - System Elektronicznej Rejestracji Pacjenta</title>
-    <link rel="stylesheet" href="../css/styleKF2.css">
     <link rel="stylesheet" href="../css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/time.js"></script>
   </head>
 
   <body>
@@ -39,7 +37,7 @@
 
     <!--lista lekarzy -->
     <div class="p-reception main-background-gradient flex-container">
-      <div class="h-inner u-padding-top--base">
+      <div class="h-inner u-padding-top--base-x4 u-padding-bottom--base-x5">
 
         <h1 class="main-heading-h1">Recepcja</h1>
 
@@ -71,24 +69,27 @@
                     }
                   }
 
-                  echo "<label>
-                          <input  type='checkbox' name='idLekarza[]' value='$row[0]' $checked>
-                          $row[1] $row[2]
+                  echo "<label class='ui-checkbox'>
+                          <input type='checkbox' name='idLekarza[]' id='idLekarza-$row[1]' value='$row[0]' $checked>
+                          <span>";
+                            include '../php/components/svg/svg_ok.php';
+                  echo   "</span>
+                          <label for='idLekarza-$row[1]'>$row[1] $row[2]</label>
                         </label>";
-
-                  //array_push($doctorListFull, "$row[0]");
                 }
               ?>
 
               <div class="u-margin-top--base-half u-padding-top--base-half main-divider-top">
-                <label>
-                  <input type="radio" name="freeDayOnly" value="yes">
-                  Tylko wolne terminy
+                <label class="ui-radio">
+                  <input type="radio" name="freeDayOnly" id="freeDayOnly" value="yes">
+                  <span><?php include '../php/components/svg/svg_ok.php'; ?></span>
+                  <label for="freeDayOnly">Tylko wolne terminy</label>
                 </label>
 
-                <label>
-                  <input type="radio" name="freeDayOnly" value="no">
-                  Wszystkie terminy
+                <label class="ui-radio">
+                  <input type="radio" name="freeDayOnly" id="allDays" value="no">
+                  <span><?php include '../php/components/svg/svg_ok.php'; ?></span>
+                  <label for="allDays">Wszystkie terminy</label>
                 </label>
               </div>
 
@@ -105,14 +106,16 @@
               </div>
 
               <div class="u-margin-top--base-half u-padding-top--base-half main-divider-top">
-                <label>
-                  <input type="radio" name="free" value="1">
-                  Od rana
+                <label class="ui-radio">
+                  <input type="radio" name="free" id="fromMorning" value="1">
+                  <span><?php include '../php/components/svg/svg_ok.php'; ?></span>
+                  <label for="fromMorning">Od rana</label>
                 </label>
 
-                <label>
-                  <input type="radio" name="free" value="1">
-                  Popołudniu
+                <label class="ui-radio">
+                  <input type="radio" name="free" id="fromAfternoon" value="1">
+                  <span><?php include '../php/components/svg/svg_ok.php'; ?></span>
+                  <label for="fromAfternoon">Popołudniu</label>
                 </label>
               </div>
 
@@ -135,8 +138,8 @@
             </form>
           </div>
 
-          <div class="p-reception__timetable">
-            <h2 class="p-reception__header">Harmonogram pracy Przychodni</h2>
+          <div class="c-timetable">
+            <h2 class="c-timetable__header">Harmonogram pracy Przychodni</h2>
 
             <?php
               // warunki
@@ -162,9 +165,9 @@
               $doctorList = mysqli_query($server, $queryDoctorList) or die ("Zle sformulowane query");
 
               while ($row = mysqli_fetch_array($doctorList)) {
-                echo "<div class='p-reception__timetable__row'>";
-                echo "<div class='p-reception__timetable__doctor'>$row[1] $row[2]</div>";
-                echo "<div class='p-reception__timetable__cell-wrapper'>";
+                echo "<div class='c-timetable__row'>";
+                echo "<div class='c-timetable__doctor'>$row[1] $row[2]</div>";
+                echo "<div class='c-timetable__cell-wrapper'>";
 
                 //**************SQL VISITS************************************
                 $queyVisits = "SELECT Visits.room, Visits.id, Visits.time, Visits.patient_id, Visits.date
@@ -180,14 +183,14 @@
                   //wizyty podglad ****************************************************************
                   if ($visit[3] > 0) {
                     $hour = substr($visit[2],0,5);
-                    echo "<div class='p-reception__timetable__cell u-cursor--zoom-in' onclick=location.href='reception.php?showRoom=$visit[0]&showId=$visit[1]&showTime=$visit[2]&showPatient=$visit[3]&showDate=$visit[4]&showDFN=$row[1]&showDLN=$row[2]&showDoctorId=$row[0]'>
+                    echo "<div class='c-timetable__cell u-cursor--zoom-in' onclick=location.href='reception.php?showRoom=$visit[0]&showId=$visit[1]&showTime=$visit[2]&showPatient=$visit[3]&showDate=$visit[4]&showDFN=$row[1]&showDLN=$row[2]&showDoctorId=$row[0]'>
                             <span>$visit[0]</span>
                             <span>$visit[1]</span>
                             <span>$visit[2]</span>
                           </div>";
                   } else {
                     // Wysylanie dodawanie**********************************************************
-                    echo "<div class='p-reception__timetable__cell p-reception__timetable__cell--free u-cursor--grab' onclick=location.href='reception.php?showRoom=$visit[0]&showId=$visit[1]&showTime=$visit[2]&showPatient=$visit[3]&showDate=$visit[4]&showDFN=$row[1]&showDLN=$row[2]&showDoctorId=$row[0]'>
+                    echo "<div class='c-timetable__cell c-timetable__cell--free u-cursor--grab' onclick=location.href='reception.php?showRoom=$visit[0]&showId=$visit[1]&showTime=$visit[2]&showPatient=$visit[3]&showDate=$visit[4]&showDFN=$row[1]&showDLN=$row[2]&showDoctorId=$row[0]'>
                             <span>$visit[0]</span>
                             <span>Wolny</span>
                             <span>$visit[2]</span>
@@ -305,7 +308,7 @@
                           <span>Godzina:</span>"
                           .$_GET['showTime'].
                         "</label>";
-                        
+
                   echo "<label>
                           <span>Data:</span>"
                           .$_GET['showDate'].

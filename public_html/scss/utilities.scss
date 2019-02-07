@@ -56,6 +56,16 @@
   &--base-half {
     padding-top: $c-space-vertical / 2 !important;
   }
+
+  &--base-x4 {
+    padding-top: $c-space-vertical * 4 !important;
+  }
+}
+
+.u-padding-bottom {
+  &--base-x5 {
+    padding-bottom: $c-space-vertical * 5 !important;
+  }
 }
 
 .u-font-weight {
