@@ -38,6 +38,9 @@
 
           setrawcookie("serp_user_email", $_POST['email'], time() + (86400 * 30), "/");
           setrawcookie("serp_user_token", $accessToken, time() + (86400 * 30), "/");
+          setrawcookie("serp_user_firstname", array_values($result)[1]);
+          setrawcookie("serp_user_lastname", array_values($result)[2]);
+          setrawcookie("serp_user_type", array_values($result)[3]);
 
           echo "<script type='text/javascript'>
                   window.location = '/app/app.php';

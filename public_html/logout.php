@@ -8,6 +8,9 @@
 
     setcookie('serp_user_email');
     setcookie('serp_user_token');
+    setcookie('serp_user_firstname');
+    setcookie('serp_user_lastname');
+    setcookie('serp_user_type');
   }
 
   echo "<script type='text/javascript'>
