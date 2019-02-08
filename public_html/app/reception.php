@@ -27,6 +27,7 @@
     <title>SERP - System Elektronicznej Rejestracji Pacjenta</title>
     <link rel="stylesheet" href="../css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/modal.js"></script>
   </head>
 
   <body>
@@ -404,15 +405,7 @@
 
     <script>
       window.onload = function() {
-        var modal = document.getElementById('myModal');
-        var span = document.getElementsByClassName('c-modal__header__close')[0];
-
-        if (modal) {
-          span.onclick = function() {
-            modal.style.display = "none";
-            location.href="reception.php";
-          }
-        }
+        closeModal('reception.php');
       }
     </script>
 

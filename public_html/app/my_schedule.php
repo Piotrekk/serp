@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="../css/styleKF2.css">
     <link rel="stylesheet" href="../css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/time.js"></script>
+    <script src="../js/modal.js"></script>
   </head>
 
   <body>
@@ -76,6 +76,12 @@
         </div>
       </div>
     </div>
+
+    <script>
+      window.onload = function() {
+        closeModal('my_schedule.php');
+      }
+    </script>
 
   </body>
 </html>
