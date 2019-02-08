@@ -25,7 +25,6 @@
 <html>
   <head>
     <title>SERP - System Elektronicznej Rejestracji Pacjenta</title>
-    <link rel="stylesheet" href="../css/styleKF2.css">
     <link rel="stylesheet" href="../css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/modal.js"></script>
@@ -63,7 +62,7 @@
                             <span>$visit[2]</span>
                           </div>";
                   } else {
-                    echo "<div class='c-timetable__cell c-timetable__cell--free u-cursor--grab' onclick=location.href='my_schedule.php?showRoom=$visit[0]&showId=$visit[1]&showTime=$visit[2]&showPatient=$visit[3]&showDate=$visit[4]&showDFN=Agnieszka&showDLN=Kowalska&showDoctorId=1'>
+                    echo "<div class='c-timetable__cell c-timetable__cell--free'>
                             <span>$visit[0]</span>
                             <span>Wolny</span>
                             <span>$visit[2]</span>
@@ -76,6 +75,111 @@
         </div>
       </div>
     </div>
+
+    <?php
+      if (isset($_GET['showRoom'])) {
+    ?>
+      <!--***************Dodaj nowa lub Wyświetl dane istniejacej wizyty**************************-->
+      <div id="myModal" class="c-modal">
+        <div class="c-modal__wrapper">
+          <div class="c-modal__header">
+            <p>
+              <?php
+                if ($_GET['showPatient']) {
+                  echo "Szczegoly wizyty";
+                } else {
+                  echo "Nowa wizyta" ;
+                }
+              ?>
+            </p>
+            <?php include '../php/components/svg/svg_cancel.php' ?>
+          </div>
+
+          <div class="c-modal__content">
+            <form method="post" name="add" class="c-modal__content__form">
+
+              <h3 class="u-margin-bottom--base">Dane Pacjenta:</h3>
+
+              <label>
+                <span>Imię:</span>
+                <?php
+                  echo $_GET['showDFN'];
+                ?>
+              </label>
+
+              <label>
+                <span>Nazwisko:</span>
+                <?php
+                  echo $_GET['showDLN'];
+                ?>
+              </label>
+
+              <div class="u-margin-top--base u-padding-top--base main-divider-top">
+                <h3 class="u-margin-bottom--base">Lekarz:</h3>
+                <?php echo $_GET['showDFN']." ".$_GET['showDLN']; ?>
+              </div>
+
+              <div class="u-margin-top--base u-margin-bottom--base u-padding-top--base main-divider-top">
+                <h3 class="u-margin-bottom--base">Szczegoly:</h3>
+                <?php
+                  echo "<label>
+                          <span>Gabinet:</span>"
+                          .$_GET['showRoom'].
+                        "</label>";
+
+                  echo "<label>
+                          <span>Godzina:</span>"
+                          .$_GET['showTime'].
+                        "</label>";
+
+                  echo "<label>
+                          <span>Data:</span>"
+                          .$_GET['showDate'].
+                        "</label>";
+                ?>
+              </div>
+
+              <?php
+                if ($_GET['showPatient']) {
+                  echo "<button class='button button--color-blue' type='button' onclick=location.href='my_schedule.php?usun=".$_GET['showId']."'>Oznacz jako zakończona</button> ";
+                } else {
+                  echo "<input type='submit' value='Dodaj Wizyte' class='button button--color-blue'>";
+                }
+              ?>
+            </form>
+          </div>
+        </div>
+      </div>
+    <?php
+      }
+    ?>
+
+    <?php
+      if (isset($_GET['usun'])) {
+    ?>
+      <div id="myModal" class="c-modal">
+        <div class="c-modal__wrapper">
+          <div class="c-modal__header">
+            <p>Potwierdzenie</p>
+            <?php include '../php/components/svg/svg_cancel.php' ?>
+          </div>
+
+          <div class="c-modal__content">
+            <?php
+              $deleteVisit = mysqli_query($server, "DELETE FROM Visits WHERE id = '{$_GET['usun']}'") or die ("Zle sformulowane query");
+
+              if ($deleteVisit !== false) {
+                echo "Wizyta została zakończona";
+              } else {
+                "Coś poszło nie tak ze zwolnieniem wizyty..";
+              }
+            ?>
+          </div>
+        </div>
+      </div>
+    <?php
+      }
+    ?>
 
     <script>
       window.onload = function() {

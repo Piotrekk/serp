@@ -218,7 +218,15 @@
       <div id="myModal" class="c-modal">
         <div class="c-modal__wrapper">
           <div class="c-modal__header">
-            <p>Nowa wizyta</p>
+            <p>
+              <?php
+                if ($_GET['showPatient']) {
+                  echo "Szczegoly wizyty";
+                } else {
+                  echo "Nowa wizyta" ;
+                }
+              ?>
+            </p>
             <?php include '../php/components/svg/svg_cancel.php' ?>
           </div>
 
@@ -226,7 +234,7 @@
             <form method="post" name="add" class="c-modal__content__form">
             <!--***************Dodawanie pacjenta do wizyty*******************************************-->
             <?php
-            if ($_GET['showPatient'] == NULL) {
+            if (!$_GET['showPatient']) {
             ?>
               <h3 class="u-margin-bottom--base">Dane Pacjenta:</h3>
 
@@ -318,10 +326,10 @@
               </div>
 
               <?php
-                if ( $_GET['showPatient'] == NULL) {
-                  echo "<input type='submit' value='Dodaj Wizyte' class='button button--color-blue'>";
-                } else {
+                if ($_GET['showPatient']) {
                   echo "<button class='button button--color-blue' type='button' onclick=location.href='reception.php?usun=".$_GET['showId']."'>Zwolnij Wizyte</button> ";
+                } else {
+                  echo "<input type='submit' value='Dodaj Wizyte' class='button button--color-blue'>";
                 }
               ?>
             </form>
