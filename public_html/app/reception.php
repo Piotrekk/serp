@@ -82,13 +82,35 @@
 
               <div class="u-margin-top--base-half u-padding-top--base-half main-divider-top">
                 <label class="ui-radio">
-                  <input type="radio" name="freeDayOnly" id="freeDayOnly" value="yes">
+                  <input type="radio" name="freeDayOnly" id="freeDayOnly" value="yes"
+                    <?php
+                    if (isset($_POST["freeDayOnly"])) {
+                      if ($_POST['freeDayOnly'] == "yes") {
+                        echo "checked";
+                      } else {
+                        echo "";
+                      }
+                    }
+                    ?>
+                  >
                   <span><?php include '../php/components/svg/svg_ok.php'; ?></span>
                   <label for="freeDayOnly">Tylko wolne terminy</label>
                 </label>
 
                 <label class="ui-radio">
-                  <input type="radio" name="freeDayOnly" id="allDays" value="no">
+                  <input type="radio" name="freeDayOnly" id="allDays" value="no"
+                    <?php
+                      if (isset($_POST["freeDayOnly"])) {
+                        if ($_POST['freeDayOnly'] == "no") {
+                          echo "checked";
+                        } else {
+                          echo "";
+                        }
+                      } else {
+                        echo "checked";
+                      }
+                    ?>
+                  >
                   <span><?php include '../php/components/svg/svg_ok.php'; ?></span>
                   <label for="allDays">Wszystkie terminy</label>
                 </label>
@@ -97,27 +119,39 @@
               <div class="u-margin-top--base-half u-padding-top--base-half main-divider-top">
                 <label>
                   Od:
-                  <input type="date" name="startDate" value="1" class="input input--small">
+                  <input type="date" name="fromDate" value='<?php if (isset($_POST['fromDate'])) echo ($_POST['fromDate']); else echo date("Y-m-d"/* jutro,strtotime('tomorrow') */) ;  ?>'   class="input input--small">
                 </label>
 
                 <label>
                   Do:
-                  <input type="date" name="endDate" value="1" class="input input--small">
+                  <input type="date" name="toDate" value='<?php if (isset($_POST['toDate'])) echo ($_POST['toDate']); ?>'  class="input input--small">
                 </label>
               </div>
 
               <div class="u-margin-top--base-half u-padding-top--base-half main-divider-top">
                 <label class="ui-radio">
-                  <input type="radio" name="free" id="fromMorning" value="1">
+                  <input type="radio" name="fromTime" value="06:00:00" <?php if (isset($_POST["fromTime"])) if ($_POST['fromTime'] == '06:00:00') echo "checked"; ?>  id="fromMorning">
                   <span><?php include '../php/components/svg/svg_ok.php'; ?></span>
-                  <label for="fromMorning">Od rana</label>
+                  <label for="fromMorning">Rana</label>
                 </label>
 
                 <label class="ui-radio">
-                  <input type="radio" name="free" id="fromAfternoon" value="1">
+                  <input type="radio" name="fromTime" value="12:00:00" <?php if (isset($_POST["fromTime"])) if ($_POST['fromTime'] == '12:00:00') echo "checked"; ?>  id="fromAfternoon">
                   <span><?php include '../php/components/svg/svg_ok.php'; ?></span>
                   <label for="fromAfternoon">Popołudniu</label>
                 </label>
+
+
+<!-- dodalem
+                <label class="ui-radio">
+                  <<input type="radio" name="fromTime" value="1" <?php if(isset($_POST["fromTime"])) if($_POST['fromTime'] == '1') echo "checked"; ?> id="fromAfternoon">
+                  <span><?php include '../php/components/svg/svg_ok.php'; ?></span>
+                  <label for="fromAfternoon">Cały dzień</label>
+                </label>
+ -->
+
+
+
               </div>
 
               <?php /*
@@ -136,6 +170,9 @@
 
               <!--  <input type="reset" value="Pokaż Wszystkich"> -->
               <input type="submit" name="submit"  value="Pokaż" class="button button--color-blue button--small u-margin-top--base">
+<!-- dodalem
+              <button type="button" onclick="location.href='reception_v2.php'" class="button button--color-blue button--small u-margin-top--base>Pokaż Wszystko</button>
+-->
             </form>
           </div>
 
@@ -151,10 +188,28 @@
 
               $freeDayOnly = " ";
               if (isset($_POST["freeDayOnly"])) {
-                // $freeDayOnly = $_POST['freeDayOnly'];
                 if ($_POST['freeDayOnly'] == "yes") {
                   $freeDayOnly = " AND Visits.patient_id IS NULL ";
                 }
+              }
+
+              $fromTime = " ";
+              if (isset($_POST['fromTime'])) {
+                if ($_POST['fromTime'] == '06:00:00') {
+                  $fromTime = " AND Visits.time >= '".$_POST['fromTime']."' AND Visits.time < '12:00:00' ";
+                } else {
+                  $fromTime = " AND Visits.time >= '".$_POST['fromTime']."'";
+                }
+              }
+
+              $fromData = " ";
+              if (isset($_POST["fromDate"])) {
+                $fromData = " AND Visits.date >= '".($_POST["fromDate"])."' ";
+              }
+
+              $toData = " ";
+              if (isset($_POST["toData"])) {
+                $toData = " AND Visits.date <= '".($_POST["toData"])."' ";
               }
 
               //**************SQL Doctor select*****************************
@@ -173,7 +228,7 @@
                 //**************SQL VISITS************************************
                 $queyVisits = "SELECT Visits.room, Visits.id, Visits.time, Visits.patient_id, Visits.date
                                FROM Visits
-                               WHERE Visits.doctor_id = {$row[0]} $freeDayOnly  /* AND Visits.status = za AND Visits.date = UTC_DATE()*/
+                               WHERE Visits.doctor_id = {$row[0]} $freeDayOnly $fromData $toData $fromTime   /* AND Visits.status = za AND Visits.date = UTC_DATE()*/
                                ORDER BY Visits.time
                                LIMIT 500";
 
