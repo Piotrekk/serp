@@ -9,6 +9,8 @@
   if (isset($_GET['showDate'])) $_SESSION['newDate'] = $_GET['showDate'];
   if (isset($_GET['showDFN'])) $_SESSION['newDFN'] = $_GET['showDFN'];
   if (isset($_GET['showDLN'])) $_SESSION['newDLN'] = $_GET['showDLN'];
+  if (isset($_GET['showPFN'])) $_SESSION['newPFN'] = $_GET['showPFN'];
+  if (isset($_GET['showPLN'])) $_SESSION['newPLN'] = $_GET['showPLN'];
   if (isset($_GET['showDoctorId'])) $_SESSION['newDoctorId'] = $_GET['showDoctorId'];
   if (isset($_POST['newPatientFN'])) $_SESSION['newPatientFN'] = $_POST['newPatientFN'];
   if (isset($_POST['newPatientLN'])) $_SESSION['newPatientLN'] = $_POST['newPatientLN'];
@@ -226,8 +228,9 @@
                 echo "<div class='c-timetable__cell-wrapper'>";
 
                 //**************SQL VISITS************************************
-                $queyVisits = "SELECT Visits.room, Visits.id, Visits.time, Visits.patient_id, Visits.date
+                $queyVisits = "SELECT Visits.room, Visits.id, Visits.time, Visits.patient_id, Visits.date, Patients.first_name, Patients.last_name
                                FROM Visits
+                               LEFT JOIN Patients ON Visits.patient_id = Patients.id
                                WHERE Visits.doctor_id = {$row[0]} $freeDayOnly $fromData $toData $fromTime   /* AND Visits.status = za AND Visits.date = UTC_DATE()*/
                                ORDER BY Visits.time
                                LIMIT 500";
@@ -239,14 +242,14 @@
                   //wizyty podglad ****************************************************************
                   if ($visit[3] > 0) {
                     $hour = substr($visit[2],0,5);
-                    echo "<div class='c-timetable__cell u-cursor--zoom-in' onclick=location.href='reception.php?showRoom=$visit[0]&showId=$visit[1]&showTime=$visit[2]&showPatient=$visit[3]&showDate=$visit[4]&showDFN=$row[1]&showDLN=$row[2]&showDoctorId=$row[0]'>
+                    echo "<div class='c-timetable__cell u-cursor--zoom-in' onclick=location.href='reception.php?showRoom=$visit[0]&showId=$visit[1]&showTime=$visit[2]&showPatient=$visit[3]&showDate=$visit[4]&showDFN=$row[1]&showDLN=$row[2]&showDoctorId=$row[0]&showPFN=$visit[6]&showPLN=$visit[5]'>
                             <span>$visit[0]</span>
                             <span>$visit[1]</span>
                             <span>$visit[2]</span>
                           </div>";
                   } else {
                     // Wysylanie dodawanie**********************************************************
-                    echo "<div class='c-timetable__cell c-timetable__cell--free u-cursor--grab' onclick=location.href='reception.php?showRoom=$visit[0]&showId=$visit[1]&showTime=$visit[2]&showPatient=$visit[3]&showDate=$visit[4]&showDFN=$row[1]&showDLN=$row[2]&showDoctorId=$row[0]'>
+                    echo "<div class='c-timetable__cell c-timetable__cell--free u-cursor--grab' onclick=location.href='reception.php?showRoom=$visit[0]&showId=$visit[1]&showTime=$visit[2]&showPatient=$visit[3]&showDate=$visit[4]&showDFN=$row[1]&showDLN=$row[2]&showDoctorId=$row[0]&showPFN=$visit[6]&showPLN=$visit[5]'>
                             <span>$visit[0]</span>
                             <span>Wolny</span>
                             <span>$visit[2]</span>
@@ -341,14 +344,14 @@
               <label>
                 <span>Imię:</span>
                 <?php
-                  echo $_GET['showDFN'];
+                  echo $_GET['showPFN'];
                 ?>
               </label>
 
               <label>
                 <span>Nazwisko:</span>
                 <?php
-                  echo $_GET['showDLN'];
+                  echo $_GET['showPLN'];
                 ?>
               </label>
             <?php
