@@ -419,9 +419,14 @@
               $findIdPatient = "SELECT id from Patients WHERE Patients.pesel = {$_SESSION['newPatientPesel']} ";
               $resultFindIdPatient = mysqli_query($server, $findIdPatient) or die ("Zle sformulowane dodania pacjenta..");
               $tableFindIdPatient = mysqli_fetch_array($resultFindIdPatient);
-
+/*
               $addVisit = "INSERT INTO `Visits` (`id`, `date`, `time`, `status`, `room`, `patient_id`, `doctor_id`)
                           VALUES (NULL, '{$_SESSION['newDate']}', '{$_SESSION['newTime']}', 'za', '{$_SESSION['newRoom']}', '{$tableFindIdPatient[0]}', '{$_SESSION['newDoctorId']}')";
+*/
+
+/*Poprawione*/          $addVisit = "UPDATE `Visits` SET `date`='{$_SESSION['newDate']}', `time` ='{$_SESSION['newTime']}', `status`='za', `room`='{$_SESSION['newRoom']}', `patient_id`='{$tableFindIdPatient[0]}', `doctor_id`='{$_SESSION['newDoctorId']}'
+                                    WHERE Visits.id = '{$_GET['showId']}'  ";
+
               $addVisitTest = mysqli_query($server, $addVisit) or die ("Zle sformulowane query");
 
               if ($addVisitTest !== false) {
@@ -451,7 +456,7 @@
             <p>Potwierdzenie</p>
             <?php include '../php/components/svg/svg_cancel.php' ?>
           </div>
-          
+
           <div class="c-modal__content">
             <?php
               $SetPatientNULL  = "UPDATE `Visits` SET `status` = 'wo', `patient_id` = NULL WHERE `Visits`.`id` = '{$_GET['usun']}'";
@@ -477,6 +482,26 @@
         closeModal('reception.php');
       }
     </script>
+
+<?php
+/*
+$iroom = "17";
+$idoc = "3";
+
+for($i=9;$i<13;$i++)
+{
+$z = "INSERT INTO `Visits` (`id`, `date`, `time`, `status`, `room`, `patient_id`, `doctor_id`)
+VALUES (NULL, '2018-12-26', '{$i}:00:00', 'wo', '{$iroom}', NULL, '{$idoc}'),
+ (NULL, '2018-12-26', '{$i}:15:00', 'wo', '{$iroom}', NULL, '{$idoc}'),
+(NULL, '2018-12-26', '{$i}:30:00', 'wo', '{$iroom}', NULL, '{$idoc}'),
+(NULL, '2018-12-26', '{$i}:45:00', 'wo', '{$iroom}', NULL, '{$idoc}')";
+$zz = mysqli_query($server, $z) or die ("Zle sformulowane query");
+
+}
+*/
+
+?>
+
 
   </body>
 </html>
