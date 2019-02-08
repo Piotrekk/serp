@@ -446,22 +446,25 @@
     ?>
 
       <div id="myModal" class="c-modal">
-        <div class="c-modal__content">
-          <div>
+        <div class="c-modal__wrapper">
+          <div class="c-modal__header">
+            <p>Potwierdzenie</p>
             <?php include '../php/components/svg/svg_cancel.php' ?>
           </div>
+          
+          <div class="c-modal__content">
+            <?php
+              $SetPatientNULL  = "UPDATE `Visits` SET `status` = 'wo', `patient_id` = NULL WHERE `Visits`.`id` = '{$_GET['usun']}'";
+              $TestSetPatientNULL =  mysqli_query($server, $SetPatientNULL) or die ("Zle sformulowane zwolnienie wizyty..");
 
-          <?php
-            $SetPatientNULL  = "UPDATE `Visits` SET `status` = 'wo', `patient_id` = NULL WHERE `Visits`.`id` = '{$_GET['usun']}'";
-            $TestSetPatientNULL =  mysqli_query($server, $SetPatientNULL) or die ("Zle sformulowane zwolnienie wizyty..");
-
-            if ($TestSetPatientNULL !== false) {
-              echo "Wizyta została zwolniona";
-            } else {
-              "Coś poszło nie tak ze zwolnieniem wizyty..";
-            }
-            //******** koniec zwalniania wizyty i SQL**************************
-          ?>
+              if ($TestSetPatientNULL !== false) {
+                echo "Wizyta została zwolniona";
+              } else {
+                "Coś poszło nie tak ze zwolnieniem wizyty..";
+              }
+              //******** koniec zwalniania wizyty i SQL**************************
+            ?>
+          </div>
         </div>
       </div>
 
