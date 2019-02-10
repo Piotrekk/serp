@@ -397,7 +397,10 @@
         <div class="c-modal__wrapper">
           <div class="c-modal__header">
             <p>Nowa wizyta</p>
-            <?php include '../php/components/svg/svg_cancel.php' ?>
+            <?php
+            // zmiana na zamykanie po okreslonym czasie.
+            // include '../php/components/svg/svg_cancel.php'
+            ?>
           </div>
 
           <div class="c-modal__content">
@@ -417,7 +420,7 @@
                         mysqli_query($server, $addPatient) or die ("Zle sformulowane dodania pacjenta..");
                         //*********************Zapis nowgo pacjenta do pliku txt***************************************
                         // pliki txt z pacjentami i wizytami zawieraja polecenia SQL - pozwola odtworzyc baze w sql.
-                        saveInFile("addPatient.txt",$addPatient."\r\n");
+                        saveInFile("addPatient.dat",$addPatient."\r\n");
 
                         $findIdPatient = "SELECT id from Patients WHERE Patients.pesel = '{$_SESSION['newPatientPesel']}' ";
                         $resultFindIdPatient = mysqli_query($server, $findIdPatient) or die ("Zle sformulowane dodania pacjenta..");
@@ -438,7 +441,7 @@
                     $addVisit = "UPDATE `Visits` SET `status`='za', `patient_id`='{$idPatientUpdate}'
                                 WHERE Visits.id = '{$_GET['showId']}' ";
                     //*********************Zapis nowej wizyty do pliku txt***************************************
-                    saveInFile("addVisit.txt",$addVisit."\r\n");
+                    saveInFile("Visits.dat",$addVisit."\r\n");
 
                     $addVisitTest = mysqli_query($server, $addVisit) or die ("Zle sformulowane query");
                     if ($addVisitTest !== false)
@@ -464,7 +467,7 @@
     <?php
       //******** koniec dodanie wizyty i SQL**************************
       } else if (isset($_GET['usun'])) {
-      //*********************informacja o zwolnieniu wizyty - usuwa pacjena z wizyty************
+      //*********************informacja o zwolnieniu wizyty - usuwa pacjena z wizyty w SQL************
     ?>
 
       <div id="myModal" class="c-modal">
@@ -479,9 +482,13 @@
               $SetPatientNULL  = "UPDATE `Visits` SET `status` = 'wo', `patient_id` = NULL WHERE `Visits`.`id` = '{$_GET['usun']}'";
               $TestSetPatientNULL =  mysqli_query($server, $SetPatientNULL) or die ("Zle sformulowane zwolnienie wizyty..");
 
-              if ($TestSetPatientNULL !== false) {
+              if ($TestSetPatientNULL !== false)
+              {
                 echo "Wizyta została zwolniona";
-              } else {
+                saveInFile("Visits.dat",$SetPatientNULL."\r\n");
+              }
+              else
+              {
                 "Coś poszło nie tak ze zwolnieniem wizyty..";
               }
             ?>
