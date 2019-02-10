@@ -57,10 +57,11 @@
             // doctors list
             while ($visit = mysqli_fetch_array($visits)) {
               $hour = substr($visit[2],0,5);
-              $heksId = strtoupper(dechex($visit[1]));
+              $visitId = strtoupper(dechex($visit[1]));
+
               echo "<div class='p-waiting-room__visits__visit__cell u-font-size--30'>
                       <span>$visit[0]</span>
-                      <span class='u-font-weight--600'>$heksId</span>
+                      <span class='u-font-weight--600'>$visitId</span>
                       <span>$hour</span>
                    </div>";
             }

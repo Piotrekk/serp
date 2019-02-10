@@ -15,18 +15,17 @@
   if (isset($_POST['newPatientLN'])) $_SESSION['newPatientLN'] = $_POST['newPatientLN'];
   if (isset($_POST['newPatientPesel'])) $_SESSION['newPatientPesel'] = $_POST['newPatientPesel'];
 
-  function saveInFile($where, $what)
-  {
-    $file = fopen($where,"a+");
-    while(true)
-    {
-        if(flock($file,LOCK_EX))
-        {
+  function saveInFile($where, $what) {
+    $file = fopen($where, "a+");
+
+    while(true) {
+        if(flock($file,LOCK_EX)) {
           fputs($file,$what);
           flock($file,LOCK_UN);
           break;
         }
     }
+
     fclose($file);
   }
 
@@ -155,21 +154,9 @@
                   <span><?php include '../php/components/svg/svg_ok.php'; ?></span>
                   <label for="fromAfternoon">Popołudniu</label>
                 </label>
-
-<!-- dodalem
-                <label class="ui-radio">
-                  <<input type="radio" name="fromTime" value="1" <?php if(isset($_POST["fromTime"])) if($_POST['fromTime'] == '1') echo "checked"; ?> id="fromAfternoon">
-                  <span><?php include '../php/components/svg/svg_ok.php'; ?></span>
-                  <label for="fromAfternoon">Cały dzień</label>
-                </label>
- -->
               </div>
 
-              <!--  <input type="reset" value="Pokaż Wszystkich"> -->
               <input type="submit" name="submit"  value="Pokaż" class="button button--color-blue button--small u-margin-top--base">
-<!-- dodalem
-              <button type="button" onclick="location.href='reception_v2.php'" class="button button--color-blue button--small u-margin-top--base>Pokaż Wszystko</button>
--->
             </form>
           </div>
 
@@ -237,10 +224,10 @@
                   //wizyty podglad ************************************************************************************
                   if ($visit[3] > 0) {
                     $hour = substr($visit[2],0,5);
-                    $heksId = strtoupper(dechex($visit[1]));
+                    $visitId = strtoupper(dechex($visit[1]));
                     echo "<div class='c-timetable__cell u-cursor--zoom-in' onclick=location.href='reception.php?showRoom=$visit[0]&showId=$visit[1]&showTime=$visit[2]&showPatient=$visit[3]&showDate=$visit[4]&showDFN=$row[1]&showDLN=$row[2]&showDoctorId=$row[0]&showPFN=$visit[6]&showPLN=$visit[5]'>
                             <span>$visit[0]</span>
-                            <span>$heksId</span>
+                            <span>$visitId</span>
                             <span>$visit[2]</span>
                           </div>";
                   } else {
@@ -292,20 +279,18 @@
 
               <label>
                 <span>Pacjent:</span>
-                    <!--
-                    zastapione select
-                    <input type="text" name="newPatientPesel" class="input input--small">
-                    -->
-                    <?php //SELECT ************************************************************************SELECT*******
-                      echo  "<select name=\"fomSelectPatient\" class=\"input input--small\">";
-                      echo  "<option value=\"\" selected disabled hidden >Znajdz Pacjenta</option>";
-                      $queryPatientList = "SELECT first_name, last_name, pesel, id FROM Patients ORDER BY first_name ASC";
-                      $resultPatientList = mysqli_query($server, $queryPatientList);
-                      while($rowPatientList=mysqli_fetch_array($resultPatientList)) {
-                        echo "<option value='".$rowPatientList[3]."' >".$rowPatientList[0]." ".$rowPatientList[1]."  PESEL: ".$rowPatientList[2]."</option>";
-                      }
-                      echo  "</select>";
-                    ?>
+                <?php //SELECT ************************************************************************SELECT*******
+                  echo  "<select name=\"fomSelectPatient\" class=\"input input--small\">";
+                  echo  "<option value=\"\" selected disabled hidden >Znajdz Pacjenta</option>";
+
+                  $queryPatientList = "SELECT first_name, last_name, pesel, id FROM Patients ORDER BY first_name ASC";
+                  $resultPatientList = mysqli_query($server, $queryPatientList);
+
+                  while($rowPatientList=mysqli_fetch_array($resultPatientList)) {
+                    echo "<option value='".$rowPatientList[3]."' >".$rowPatientList[0]." ".$rowPatientList[1]."  PESEL: ".$rowPatientList[2]."</option>";
+                  }
+                  echo  "</select>";
+                ?>
               </label>
 
               <h3 class="u-margin-top--base">Dane nowego Pacienta:</h3>
@@ -406,54 +391,47 @@
           <div class="c-modal__content">
             <?php
               $idPatientUpdate = null;
-              if(!isset($_POST['fomSelectPatient']))
-              //  if($_POST['fomSelectPatient'] > -1)// SQL dodaje dodaje nowego pacjenta i wyszukuje jego ID po nr PESEL
-                {
-                    //*********************************************Walidacja PESEL************************************
-                    $validation = "SELECT COUNT(pesel) FROM Patients WHERE pesel = {$_SESSION['newPatientPesel']}";
-                    $validationTest = mysqli_query($server, $validation);
-                    $validationTable = mysqli_fetch_array($validationTest);
-                    if($validationTable[0] < 1)
-                    {
-                        $addPatient = "INSERT INTO `Patients` (`id`, `first_name`, `last_name`, `pesel`)
-                                      VALUES (NULL, '{$_SESSION['newPatientLN']}', '{$_SESSION['newPatientFN']}', {$_SESSION['newPatientPesel']})";
-                        mysqli_query($server, $addPatient) or die ("Zle sformulowane dodania pacjenta..");
-                        //*********************Zapis nowgo pacjenta do pliku txt***************************************
-                        // pliki txt z pacjentami i wizytami zawieraja polecenia SQL - pozwola odtworzyc baze w sql.
-                        saveInFile("addPatient.dat",$addPatient."\r\n");
+              if (!isset($_POST['fomSelectPatient'])) { // SQL dodaje dodaje nowego pacjenta i wyszukuje jego ID po nr PESEL
+                  //*********************************************Walidacja PESEL************************************
+                  $validation = "SELECT COUNT(pesel) FROM Patients WHERE pesel = {$_SESSION['newPatientPesel']}";
+                  $validationTest = mysqli_query($server, $validation);
+                  $validationTable = mysqli_fetch_array($validationTest);
 
-                        $findIdPatient = "SELECT id from Patients WHERE Patients.pesel = '{$_SESSION['newPatientPesel']}' ";
-                        $resultFindIdPatient = mysqli_query($server, $findIdPatient) or die ("Zle sformulowane dodania pacjenta..");
-                        $tableFindIdPatient = mysqli_fetch_array($resultFindIdPatient);
-                        $idPatientUpdate = $tableFindIdPatient[0];
-                    }
-                    else
-                    {
-                        $idPatientUpdate = -1;
-                    }
-                }
-                else
-                {
-                    $idPatientUpdate = $_POST['fomSelectPatient'];
-                }
-                if($idPatientUpdate != -1)
-                {
-                    $addVisit = "UPDATE `Visits` SET `status`='za', `patient_id`='{$idPatientUpdate}'
-                                WHERE Visits.id = '{$_GET['showId']}' ";
-                    //*********************Zapis nowej wizyty do pliku txt***************************************
-                    saveInFile("Visits.dat",$addVisit."\r\n");
+                  if ($validationTable[0] < 1) {
+                      $addPatient = "INSERT INTO `Patients` (`id`, `first_name`, `last_name`, `pesel`)
+                                    VALUES (NULL, '{$_SESSION['newPatientLN']}', '{$_SESSION['newPatientFN']}', {$_SESSION['newPatientPesel']})";
+                      mysqli_query($server, $addPatient) or die ("Zle sformulowane dodania pacjenta..");
+                      //*********************Zapis nowgo pacjenta do pliku txt***************************************
+                      // pliki txt z pacjentami i wizytami zawieraja polecenia SQL - pozwola odtworzyc baze w sql.
+                      saveInFile("addPatient.dat",$addPatient."\r\n");
 
-                    $addVisitTest = mysqli_query($server, $addVisit) or die ("Zle sformulowane query");
-                    if ($addVisitTest !== false)
-                        echo "Wizyta została zarejestrowana w systemie.";
-                    else
-                        echo "Coś poszło nie tak..";
-                }
-                else
-                {
-                    echo "PESEL istnieje już w bazie";
+                      $findIdPatient = "SELECT id from Patients WHERE Patients.pesel = '{$_SESSION['newPatientPesel']}' ";
+                      $resultFindIdPatient = mysqli_query($server, $findIdPatient) or die ("Zle sformulowane dodania pacjenta..");
+                      $tableFindIdPatient = mysqli_fetch_array($resultFindIdPatient);
+                      $idPatientUpdate = $tableFindIdPatient[0];
+                  } else {
+                    $idPatientUpdate = -1;
+                  }
+                } else {
+                  $idPatientUpdate = $_POST['fomSelectPatient'];
                 }
 
+                if ($idPatientUpdate != -1) {
+                  $addVisit = "UPDATE `Visits` SET `status`='za', `patient_id`='{$idPatientUpdate}'
+                              WHERE Visits.id = '{$_GET['showId']}' ";
+                  //*********************Zapis nowej wizyty do pliku txt***************************************
+                  saveInFile("Visits.dat",$addVisit."\r\n");
+
+                  $addVisitTest = mysqli_query($server, $addVisit) or die ("Zle sformulowane query");
+                  if ($addVisitTest !== false) {
+                    echo "Wizyta została zarejestrowana w systemie.";
+                  } else {
+                    echo "Coś poszło nie tak..";
+                  }
+                }
+                else {
+                  echo "PESEL istnieje już w bazie";
+                }
             ?>
           </div>
         </div>
@@ -482,14 +460,11 @@
               $SetPatientNULL  = "UPDATE `Visits` SET `status` = 'wo', `patient_id` = NULL WHERE `Visits`.`id` = '{$_GET['usun']}'";
               $TestSetPatientNULL =  mysqli_query($server, $SetPatientNULL) or die ("Zle sformulowane zwolnienie wizyty..");
 
-              if ($TestSetPatientNULL !== false)
-              {
+              if ($TestSetPatientNULL !== false) {
                 echo "Wizyta została zwolniona";
-                saveInFile("Visits.dat",$SetPatientNULL."\r\n");
-              }
-              else
-              {
-                "Coś poszło nie tak ze zwolnieniem wizyty..";
+                saveInFile("Visits.dat", $SetPatientNULL."\r\n");
+              } else {
+                echo "Coś poszło nie tak ze zwolnieniem wizyty..";
               }
             ?>
           </div>
