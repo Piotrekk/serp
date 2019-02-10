@@ -1,0 +1,4 @@
+UPDATE `Visits` SET `status`='za', `patient_id`='56'
+                                WHERE Visits.id = '254' 
+UPDATE `Visits` SET `status`='za', `patient_id`='54'
+                                WHERE Visits.id = '196' 

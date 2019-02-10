@@ -1,0 +1,4 @@
+INSERT INTO `Patients` (`id`, `first_name`, `last_name`, `pesel`)
+                                      VALUES (NULL, 'Wieczorek', 'Krzysztof', 08736392)
+INSERT INTO `Patients` (`id`, `first_name`, `last_name`, `pesel`)
+                                      VALUES (NULL, 'Tolska', 'Olga', 0022214)
