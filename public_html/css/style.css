@@ -453,3 +453,25 @@ html, body {
         margin: 0 0 0 7.5px; }
 
 /*# sourceMappingURL=style.css.map */
+
+/* NOWE KLASY  */
+.patients-list {
+  display: inline-block;
+  width: 300px;
+  padding: 5px;
+}
+.letter {
+  padding: 8px;
+  font-weight: 600;
+  font-size: 24px;
+  color: #151515;
+}
+.patient-page {
+  padding: 30px;
+}
+.search {
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+.show-patienst-list{
+}
