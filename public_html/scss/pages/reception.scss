@@ -17,7 +17,7 @@
 
   &__menu {
     margin-right: $c-space-horizontal * 4;
-    
+
     form {
       display: flex;
       flex-flow: column;
@@ -44,5 +44,15 @@
         }
       }
     }
+  }
+
+  &__last-visit {
+    bottom: 0;
+    width: 100%;
+    padding: ($c-space-horizontal / 2) $c-space-horizontal;
+    position: fixed;
+    font-size: $c-font-size-sm;
+    color: $white;
+    background: $blue;
   }
 }
