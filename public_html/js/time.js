@@ -1,4 +1,4 @@
-function time() {
+const time = function() {
   let currentTime = new Date(),
     resultStr = '',
     hour = currentTime.getHours();

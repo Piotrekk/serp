@@ -480,25 +480,5 @@
       }
     </script>
 
-<?php
-/*
-$iroom = "17";
-$idoc = "3";
-
-for($i=9;$i<13;$i++)
-{
-$z = "INSERT INTO `Visits` (`id`, `date`, `time`, `status`, `room`, `patient_id`, `doctor_id`)
-VALUES (NULL, '2018-12-26', '{$i}:00:00', 'wo', '{$iroom}', NULL, '{$idoc}'),
- (NULL, '2018-12-26', '{$i}:15:00', 'wo', '{$iroom}', NULL, '{$idoc}'),
-(NULL, '2018-12-26', '{$i}:30:00', 'wo', '{$iroom}', NULL, '{$idoc}'),
-(NULL, '2018-12-26', '{$i}:45:00', 'wo', '{$iroom}', NULL, '{$idoc}')";
-$zz = mysqli_query($server, $z) or die ("Zle sformulowane query");
-
-}
-*/
-
-?>
-
-
   </body>
 </html>

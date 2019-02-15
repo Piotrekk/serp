@@ -1,0 +1,23 @@
+.p-patient-list {
+  min-height: calc(100vh - #{$header-height});
+
+  &__letter {
+    padding: $c-space-horizontal / 2;
+    font-weight: 600;
+    font-size: $c-font-size-xl;
+    color: $black;
+    transition: $c-transition;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      color: $blue;
+    }
+  }
+
+  &__patient-info {
+    width: 300px;
+    display: inline-block;
+    padding: $c-space-horizontal / 2;
+  }
+}

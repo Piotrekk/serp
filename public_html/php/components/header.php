@@ -27,6 +27,10 @@
         </li>
 
         <li>
+          <a href="/app/patient_list.php" class="button button--link">Pacjenci</a>
+        </li>
+
+        <li>
           <a href="/app/reception.php" class="button button--link">Recepcja</a>
         </li>
       <?php
