@@ -1,16 +1,15 @@
 <?php
   session_start();
 
-  if (isset($_GET['showRoom'])) $_SESSION['newRoom'] = $_GET['showRoom'];
-  if (isset($_GET['showTime'])) $_SESSION['newTime'] = $_GET['showTime'];
+  if (isset($_GET['showRoom'])) $_SESSION['lastOpenRoom'] = $_GET['showRoom'];
   if (isset($_GET['showId'])) $_SESSION['newId'] = $_GET['showId'];
-  if (isset($_GET['showTime'])) $_SESSION['newTime'] = $_GET['showTime'];
+  if (isset($_GET['showTime'])) $_SESSION['lastOpenTime'] = $_GET['showTime'];
   if (isset($_GET['showPatient'])) $_SESSION['newPatient'] = $_GET['showPatient'];
-  if (isset($_GET['showDate'])) $_SESSION['newDate'] = $_GET['showDate'];
-  if (isset($_GET['showDFN'])) $_SESSION['newDFN'] = $_GET['showDFN'];
-  if (isset($_GET['showDLN'])) $_SESSION['newDLN'] = $_GET['showDLN'];
-  if (isset($_GET['showPFN'])) $_SESSION['newPFN'] = $_GET['showPFN'];
-  if (isset($_GET['showPLN'])) $_SESSION['newPLN'] = $_GET['showPLN'];
+  if (isset($_GET['showDate'])) $_SESSION['lastOpenDate'] = $_GET['showDate'];
+  if (isset($_GET['showDFN'])) $_SESSION['lastOpenDFN'] = $_GET['showDFN'];
+  if (isset($_GET['showDLN'])) $_SESSION['lastOpenDLN'] = $_GET['showDLN'];
+  if (isset($_GET['showPFN'])) $_SESSION['lastOpenPFN'] = $_GET['showPFN'];
+  if (isset($_GET['showPLN'])) $_SESSION['lastOpenPLN'] = $_GET['showPLN'];
   if (isset($_GET['showDoctorId'])) $_SESSION['newDoctorId'] = $_GET['showDoctorId'];
   if (isset($_POST['newPatientFN'])) $_SESSION['newPatientFN'] = $_POST['newPatientFN'];
   if (isset($_POST['newPatientLN'])) $_SESSION['newPatientLN'] = $_POST['newPatientLN'];
@@ -182,6 +181,10 @@
       </div>
     <?php
       }
+    ?>
+
+    <?php
+      include '../php/components/info-bar.php';
     ?>
 
     <script>
